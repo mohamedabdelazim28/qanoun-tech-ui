@@ -302,7 +302,7 @@ export default function LandingPage() {
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-start gap-12 max-w-6xl mx-auto mb-12">
             <div className="space-y-6 max-w-sm">
-              <img src="/images/logo-horizontal.png" alt="Qanoun Tech" className="h-10 w-auto scale-200" />
+              <img src="/images/logo2.png" alt="Qanoun Tech" className="h-10 w-auto scale-250" />
               <p className="text-base text-muted-foreground leading-relaxed text-balance">
                 المنصة الرائدة للتكنولوجيا القانونية. نمكّن مكاتب المحاماة من رقمنة سير عملهم وتقديم خدمات قانونية استثنائية لعملائهم بطرق آمنة وموثوقة.
               </p>

@@ -1,7 +1,7 @@
 export function Logo({ className = "" }: { className?: string }) {
   return (
     <div className={`flex items-center gap-2 ${className}`}>
-      <img src="/images/logo-horizontal.png" alt="Qanoun Tech" className="h-20 object-contain" />
+      <img src="/images/logo2.png" alt="Qanoun Tech" className="h-20 object-contain scale-125" />
     </div>
   )
 }
