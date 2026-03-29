@@ -14,6 +14,12 @@ import {
   Briefcase,
   Building2,
   UserCircle,
+  Facebook,
+  Twitter,
+  Linkedin,
+  Mail,
+  Phone,
+  MapPin,
 } from "lucide-react"
 import Link from "next/link"
 
@@ -292,78 +298,90 @@ export default function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-border bg-secondary/30 py-12">
+      <footer className="border-t border-border bg-secondary/30 pt-16 pb-8">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-4 gap-8 max-w-6xl mx-auto">
-            <div className="space-y-4">
-              <img src="/images/logo-horizontal.png" alt="Qanoun Tech" className="h-8" />
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                منصة تكنولوجيا قانونية احترافية لمكاتب المحاماة الحديثة
+          <div className="flex flex-col md:flex-row justify-between items-start gap-12 max-w-6xl mx-auto mb-12">
+            <div className="space-y-6 max-w-sm">
+              <img src="/images/logo-horizontal.png" alt="Qanoun Tech" className="h-10 w-auto scale-200" />
+              <p className="text-base text-muted-foreground leading-relaxed text-balance">
+                المنصة الرائدة للتكنولوجيا القانونية. نمكّن مكاتب المحاماة من رقمنة سير عملهم وتقديم خدمات قانونية استثنائية لعملائهم بطرق آمنة وموثوقة.
               </p>
+              <div className="flex items-center gap-3 pt-2">
+                <Button variant="outline" size="icon" className="rounded-full bg-background hover:bg-magenta hover:text-white hover:border-magenta transition-colors">
+                  <Facebook className="h-4 w-4" />
+                </Button>
+                <Button variant="outline" size="icon" className="rounded-full bg-background hover:bg-magenta hover:text-white hover:border-magenta transition-colors">
+                  <Twitter className="h-4 w-4" />
+                </Button>
+                <Button variant="outline" size="icon" className="rounded-full bg-background hover:bg-magenta hover:text-white hover:border-magenta transition-colors">
+                  <Linkedin className="h-4 w-4" />
+                </Button>
+              </div>
             </div>
-            <div>
-              <h4 className="font-semibold mb-4 text-foreground">المنتج</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>
-                  <Link href="#features" className="hover:text-foreground transition-colors">
-                    الميزات
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#solutions" className="hover:text-foreground transition-colors">
-                    الحلول
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/pricing" className="hover:text-foreground transition-colors">
-                    الأسعار
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4 text-foreground">الشركة</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>
-                  <Link href="/about" className="hover:text-foreground transition-colors">
-                    من نحن
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/contact" className="hover:text-foreground transition-colors">
-                    اتصل بنا
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/careers" className="hover:text-foreground transition-colors">
-                    الوظائف
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4 text-foreground">القانونية</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>
-                  <Link href="/privacy" className="hover:text-foreground transition-colors">
-                    سياسة الخصوصية
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/terms" className="hover:text-foreground transition-colors">
-                    شروط الخدمة
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/security" className="hover:text-foreground transition-colors">
-                    الأمان
-                  </Link>
-                </li>
-              </ul>
+
+            <div className="flex flex-col sm:flex-row gap-12 md:gap-24">
+              <div>
+                <h4 className="font-bold text-lg mb-6 text-foreground relative inline-block">
+                  المنتج
+                  <span className="absolute -bottom-2 right-0 w-1/2 h-1 bg-accent rounded-full"></span>
+                </h4>
+                <ul className="space-y-4 text-muted-foreground font-medium">
+                  <li>
+                    <Link href="#features" className="hover:text-accent hover:translate-x-[-4px] transition-all flex items-center gap-2">
+                      <ArrowRight className="h-3 w-3 rtl:rotate-180" />
+                      الميزات
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="#solutions" className="hover:text-accent hover:translate-x-[-4px] transition-all flex items-center gap-2">
+                      <ArrowRight className="h-3 w-3 rtl:rotate-180" />
+                      الحلول
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/pricing" className="hover:text-accent hover:translate-x-[-4px] transition-all flex items-center gap-2">
+                      <ArrowRight className="h-3 w-3 rtl:rotate-180" />
+                      الأسعار
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+
+              <div>
+                <h4 className="font-bold text-lg mb-6 text-foreground relative inline-block">
+                  تواصل معنا
+                  <span className="absolute -bottom-2 right-0 w-1/2 h-1 bg-purple rounded-full"></span>
+                </h4>
+                <ul className="space-y-4 text-muted-foreground font-medium">
+                  <li className="flex items-center gap-3">
+                    <div className="h-8 w-8 rounded-full bg-accent/10 flex items-center justify-center shrink-0">
+                      <Mail className="h-4 w-4 text-accent" />
+                    </div>
+                    <span>info@qanoun.tech</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <div className="h-8 w-8 rounded-full bg-purple/10 flex items-center justify-center shrink-0">
+                      <Phone className="h-4 w-4 text-purple" />
+                    </div>
+                    <span dir="ltr">+20 100 123 4567</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <div className="h-8 w-8 rounded-full bg-magenta/10 flex items-center justify-center shrink-0">
+                      <MapPin className="h-4 w-4 text-magenta" />
+                    </div>
+                    <span>القليوبيه، العبور - الحى الاول </span>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
-          <div className="border-t border-border mt-12 pt-8 text-center text-sm text-muted-foreground">
-            © 2025 قانون تك. جميع الحقوق محفوظة.
+
+          <div className="border-t border-border pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
+            <p>© {new Date().getFullYear()} قانون تك. جميع الحقوق محفوظة.</p>
+            <div className="flex gap-6">
+              <Link href="/privacy" className="hover:text-foreground transition-colors">سياسة الخصوصية</Link>
+              <Link href="/terms" className="hover:text-foreground transition-colors">شروط الاستخدام</Link>
+            </div>
           </div>
         </div>
       </footer>

@@ -4,99 +4,98 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Strict Qanoun Tech brand colors */
-  /* Primary Navy Blue: #1F2A44 */
-  --background: #ffffff;
-  --foreground: #011326;
-  --card: #ffffff;
-  --card-foreground: oklch(0.17 0.02 250);
-  --popover: #ffffff;
-  --popover-foreground: oklch(0.17 0.02 250);
+  /* Strict Qanoun Tech dark brand colors */
+  --background: #0f172a;
+  --foreground: #f8fafc;
+  --card: #1e293b;
+  --card-foreground: #f8fafc;
+  --popover: #1e293b;
+  --popover-foreground: #f8fafc;
 
-  /* Primary Navy Blue */
-  --primary: #002448;
-  --primary-foreground: oklch(0.99 0 0);
+  /* Primary Navy Blue - Adjusted to dark mode accent */
+  --primary: #3b82f6; /* Modern blue */
+  --primary-foreground: #ffffff;
 
-  /* Background Light Gray: #F5F6FA */
-  --secondary: #ffffff;
-  --secondary-foreground: oklch(0.17 0.02 250);
-  --muted: #ffffff;
-  --muted-foreground: oklch(0.48 0.015 250);
+  /* Secondary */
+  --secondary: #334155;
+  --secondary-foreground: #f8fafc;
+  --muted: #334155;
+  --muted-foreground: #cbd5e1;
 
   /* Accent Purple: #7A2E8E */
-  --accent: #8400dd;
-  --accent-foreground: oklch(0.99 0 0);
+  --accent: #8b5cf6; /* Modern purple */
+  --accent-foreground: #ffffff;
 
   /* Additional purple for gradients */
-  --purple: #8400dd;
-  --purple-foreground: oklch(0.99 0 0);
+  --purple: #a855f7;
+  --purple-foreground: #ffffff;
 
   /* Accent Magenta: #C0438D */
-  --magenta: #ff11c2;
-  --magenta-foreground: oklch(0.99 0 0);
+  --magenta: #ec4899;
+  --magenta-foreground: #ffffff;
 
   /* Text Dark Gray: #2E2E2E */
-  --text-dark: #1c1f25;
+  --text-dark: #f8fafc;
 
-  --destructive: #f80022;
-  --destructive-foreground: oklch(0.99 0 0);
-  --border: #ffffff;
-  --input: #ffffff;
-  --ring: #8400dd;
+  --destructive: #ef4444;
+  --destructive-foreground: #f8fafc;
+  --border: #334155;
+  --input: #334155;
+  --ring: #3b82f6;
   --chart-1: #002448;
   --chart-2: #8400dd;
   --chart-3: #ff11c2;
   --chart-4: #f29fd6;
   --chart-5: #87a9ee;
   --radius: 8px;
-  --sidebar: #002448;
-  --sidebar-foreground: oklch(0.99 0 0);
-  --sidebar-primary: oklch(0.42 0.17 308);
-  --sidebar-primary-foreground: oklch(0.99 0 0);
-  --sidebar-accent: oklch(0.3 0.04 250);
-  --sidebar-accent-foreground: oklch(0.99 0 0);
-  --sidebar-border: oklch(0.3 0.04 250);
-  --sidebar-ring: oklch(0.42 0.17 308);
+  --sidebar: #0f172a;
+  --sidebar-foreground: #f8fafc;
+  --sidebar-primary: #3b82f6;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #1e293b;
+  --sidebar-accent-foreground: #f8fafc;
+  --sidebar-border: #334155;
+  --sidebar-ring: #3b82f6;
 }
 
 .dark {
-  --background: oklch(0.15 0.01 250);
-  --foreground: oklch(0.98 0.002 264);
-  --card: oklch(0.18 0.015 250);
-  --card-foreground: oklch(0.98 0.002 264);
-  --popover: oklch(0.18 0.015 250);
-  --popover-foreground: oklch(0.98 0.002 264);
-  --primary: oklch(0.42 0.17 308);
-  --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.22 0.015 250);
-  --secondary-foreground: oklch(0.98 0.002 264);
-  --muted: oklch(0.22 0.015 250);
-  --muted-foreground: oklch(0.6 0.01 264);
-  --accent: oklch(0.42 0.17 308);
-  --accent-foreground: oklch(0.99 0 0);
-  --purple: oklch(0.42 0.17 308);
-  --purple-foreground: oklch(0.99 0 0);
-  --magenta: oklch(0.54 0.19 340);
-  --magenta-foreground: oklch(0.99 0 0);
-  --text-dark: oklch(0.85 0.005 264);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.99 0 0);
-  --border: oklch(0.25 0.015 250);
-  --input: oklch(0.25 0.015 250);
-  --ring: oklch(0.42 0.17 308);
-  --chart-1: oklch(0.42 0.17 308);
-  --chart-2: oklch(0.54 0.19 340);
-  --chart-3: oklch(0.24 0.04 250);
-  --chart-4: oklch(0.7 0.1 340);
-  --chart-5: oklch(0.65 0.08 264);
-  --sidebar: oklch(0.18 0.015 250);
-  --sidebar-foreground: oklch(0.98 0.002 264);
-  --sidebar-primary: oklch(0.42 0.17 308);
-  --sidebar-primary-foreground: oklch(0.99 0 0);
-  --sidebar-accent: oklch(0.22 0.015 250);
-  --sidebar-accent-foreground: oklch(0.98 0.002 264);
-  --sidebar-border: oklch(0.25 0.015 250);
-  --sidebar-ring: oklch(0.42 0.17 308);
+  --background: #0f172a;
+  --foreground: #f8fafc;
+  --card: #1e293b;
+  --card-foreground: #f8fafc;
+  --popover: #1e293b;
+  --popover-foreground: #f8fafc;
+  --primary: #3b82f6;
+  --primary-foreground: #ffffff;
+  --secondary: #334155;
+  --secondary-foreground: #f8fafc;
+  --muted: #334155;
+  --muted-foreground: #cbd5e1;
+  --accent: #8b5cf6;
+  --accent-foreground: #ffffff;
+  --purple: #a855f7;
+  --purple-foreground: #ffffff;
+  --magenta: #ec4899;
+  --magenta-foreground: #ffffff;
+  --text-dark: #f8fafc;
+  --destructive: #ef4444;
+  --destructive-foreground: #f8fafc;
+  --border: #334155;
+  --input: #334155;
+  --ring: #3b82f6;
+  --chart-1: #3b82f6;
+  --chart-2: #8b5cf6;
+  --chart-3: #ec4899;
+  --chart-4: #f472b6;
+  --chart-5: #60a5fa;
+  --sidebar: #0f172a;
+  --sidebar-foreground: #f8fafc;
+  --sidebar-primary: #3b82f6;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #1e293b;
+  --sidebar-accent-foreground: #f8fafc;
+  --sidebar-border: #334155;
+  --sidebar-ring: #3b82f6;
 }
 
 @theme inline {

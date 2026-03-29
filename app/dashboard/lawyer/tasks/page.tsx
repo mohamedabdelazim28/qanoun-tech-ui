@@ -3,6 +3,24 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Plus, CheckSquare, Clock, Users, ArrowUpRight } from "lucide-react"
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog"
+import { Label } from "@/components/ui/label"
+import { Input } from "@/components/ui/input"
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select"
 
 export default function LawyerTasksPage() {
     return (
@@ -13,10 +31,48 @@ export default function LawyerTasksPage() {
                         <h1 className="text-3xl font-bold text-foreground">المهام</h1>
                         <p className="text-muted-foreground mt-1">توزيع وإدارة المهام الخاصة بالقضايا</p>
                     </div>
-                    <Button className="gap-2">
-                        <Plus className="h-4 w-4" />
-                        مهمة جديدة
-                    </Button>
+                    <Dialog>
+                        <DialogTrigger asChild>
+                            <Button className="gap-2">
+                                <Plus className="h-4 w-4" />
+                                مهمة جديدة
+                            </Button>
+                        </DialogTrigger>
+                        <DialogContent className="sm:max-w-[425px]">
+                            <DialogHeader>
+                                <DialogTitle>إضافة مهمة جديدة</DialogTitle>
+                                <DialogDescription>
+                                    أدخل تفاصيل المهمة واربطها بقضية محددة.
+                                </DialogDescription>
+                            </DialogHeader>
+                            <div className="grid gap-4 py-4">
+                                <div className="space-y-2">
+                                    <Label htmlFor="task-title">عنوان المهمة</Label>
+                                    <Input id="task-title" placeholder="مثال: مراجعة الشهود" />
+                                </div>
+                                <div className="space-y-2">
+                                    <Label htmlFor="deadline">تاريخ الاستحقاق (Deadline)</Label>
+                                    <Input id="deadline" type="date" />
+                                </div>
+                                <div className="space-y-2">
+                                    <Label htmlFor="related-case">قضية مرتبطة</Label>
+                                    <Select>
+                                        <SelectTrigger className="w-full text-right" dir="rtl">
+                                            <SelectValue placeholder="اختر القضية" />
+                                        </SelectTrigger>
+                                        <SelectContent dir="rtl">
+                                            <SelectItem value="case1">جونسون ضد شركة التقنية</SelectItem>
+                                            <SelectItem value="case2">نزاع ملكية مارتينيز</SelectItem>
+                                            <SelectItem value="case3">قضية توظيف أندرسون</SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                </div>
+                            </div>
+                            <DialogFooter>
+                                <Button type="submit" className="w-full">مهمة جديدة</Button>
+                            </DialogFooter>
+                        </DialogContent>
+                    </Dialog>
                 </div>
 
                 <div className="grid lg:grid-cols-3 gap-6">

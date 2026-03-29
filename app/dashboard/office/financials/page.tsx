@@ -7,6 +7,29 @@ import { Badge } from "@/components/ui/badge"
 import { DollarSign, ArrowUp, ArrowDown, Download, FileText, CreditCard } from "lucide-react"
 
 export default function OfficeFinancialsPage() {
+    const handleExport = () => {
+        const csvContent = "data:text/csv;charset=utf-8,\uFEFF"
+            + "التقرير المالي للمكتب\n\n"
+            + "إجمالي الإيرادات,$124,500\n"
+            + "المصروفات,$42,300\n"
+            + "مستحقات غير محصلة,$28,900\n\n"
+            + "أحدث الفواتير\n"
+            + "رقم الفاتورة,العميل,التاريخ,المبلغ,الحالة\n"
+            + "INV-2024-128,شركة التقنية المتقدمة,12 مارس 2024,$15,000,متأخرة\n"
+            + "INV-2024-129,أحمد بن خالد,10 مارس 2024,$3,500,مدفوعة\n"
+            + "INV-2024-130,مجموعة العقارية,08 مارس 2024,$22,000,مدفوعة\n"
+            + "INV-2024-131,سارة محمد,05 مارس 2024,$1,200,بانتظار الدفع\n"
+            + "INV-2024-132,مؤسسة الأفق للخدمات,01 مارس 2024,$8,500,مدفوعة\n";
+
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", "financial_report.csv");
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    };
+
     return (
         <DashboardLayout role="office">
             <div className="p-6 space-y-6">
@@ -15,9 +38,9 @@ export default function OfficeFinancialsPage() {
                         <h1 className="text-3xl font-bold text-foreground">الماليات والفوترة</h1>
                         <p className="text-muted-foreground mt-1">نظرة عامة على الإيرادات والمصروفات والفواتير</p>
                     </div>
-                    <Button className="gap-2 bg-magenta hover:bg-magenta/90 text-white">
+                    <Button onClick={handleExport} className="gap-2 bg-green-600 hover:bg-green-700 text-white">
                         <Download className="h-4 w-4" />
-                        تحميل التقرير المالي
+                        تصدير التقرير (Excel)
                     </Button>
                 </div>
 

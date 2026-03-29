@@ -56,10 +56,6 @@ export default function ClientProfilePage() {
                 <p className="text-muted-foreground mt-1">عميل منذ يناير 2024</p>
               </div>
             </div>
-            <Button variant="outline" className="gap-2 bg-transparent">
-              <Edit2 className="h-4 w-4" />
-              تعديل الملف
-            </Button>
           </div>
 
           {/* Tabs */}
@@ -91,24 +87,23 @@ export default function ClientProfilePage() {
                 <CardTitle>معلومات الاتصال</CardTitle>
                 <CardDescription>البيانات الشخصية وطرق التواصل</CardDescription>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="name">الاسم الكامل</Label>
-                  <Input id="name" defaultValue={userData.name} key={`name-${userData.name}`} />
+              <CardContent className="space-y-6">
+                <div className="space-y-1 border-b border-border pb-4">
+                  <p className="text-sm font-medium text-muted-foreground">الاسم الكامل</p>
+                  <p className="text-lg font-semibold text-foreground">{userData.name}</p>
                 </div>
-                <div className="space-y-2">
-                  <Label htmlFor="email">البريد الإلكتروني</Label>
-                  <Input id="email" type="email" defaultValue={userData.email} key={`email-${userData.email}`} />
+                <div className="space-y-1 border-b border-border pb-4">
+                  <p className="text-sm font-medium text-muted-foreground">البريد الإلكتروني</p>
+                  <p className="text-lg font-semibold text-foreground">{userData.email}</p>
                 </div>
-                <div className="space-y-2">
-                  <Label htmlFor="phone">رقم الهاتف</Label>
-                  <Input id="phone" type="tel" defaultValue={userData.phone} key={`phone-${userData.phone}`} className="text-right" dir="ltr" />
+                <div className="space-y-1 border-b border-border pb-4">
+                  <p className="text-sm font-medium text-muted-foreground">رقم الهاتف</p>
+                  <p className="text-lg font-semibold text-foreground" dir="ltr">{userData.phone}</p>
                 </div>
-                <div className="space-y-2">
-                  <Label htmlFor="city">المدينة</Label>
-                  <Input id="city" defaultValue="الرياض" />
+                <div className="space-y-1">
+                  <p className="text-sm font-medium text-muted-foreground">المدينة</p>
+                  <p className="text-lg font-semibold text-foreground">القاهرة</p>
                 </div>
-                <Button className="w-full">حفظ التغييرات</Button>
               </CardContent>
             </Card>
 

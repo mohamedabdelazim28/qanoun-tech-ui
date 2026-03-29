@@ -1,3 +1,5 @@
+"use client"
+
 import { DashboardLayout } from "@/components/dashboard-layout"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -14,17 +16,40 @@ import {
   ArrowDown,
   BarChart3,
   Activity,
+  Download,
 } from "lucide-react"
 import Link from "next/link"
 
 export default function OfficeDashboardPage() {
+  const handleExport = () => {
+    const csvContent = "data:text/csv;charset=utf-8,\uFEFF"
+      + "التقرير الشامل للمكتب\n\n"
+      + "الاسم,الدور,البريد الإلكتروني,رقم الهاتف,عدد القضايا\n"
+      + "سارة جونسون,شريك أول,sarah@firm.com,+966 50 111 2222,15\n"
+      + "مايكل تشين,محامي مساعد,michael@firm.com,+966 50 111 3333,12\n"
+      + "ديفيد مارتينيز,شريك,david@firm.com,+966 50 111 4444,14\n";
+
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "office_report.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
   return (
     <DashboardLayout role="office">
       <div className="p-6 space-y-6">
-        {/* Welcome Section */}
-        <div>
-          <h1 className="text-3xl font-bold text-foreground">نظرة عامة على المكتب</h1>
-          <p className="text-muted-foreground mt-1">مراقبة أداء مكتب المحاماة الخاص بك ونشاط الفريق</p>
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+          <div>
+            <h1 className="text-3xl font-bold text-foreground">نظرة عامة على المكتب</h1>
+            <p className="text-muted-foreground mt-1">مراقبة أداء مكتب المحاماة الخاص بك ونشاط الفريق</p>
+          </div>
+          <Button onClick={handleExport} className="gap-2 bg-green-600 hover:bg-green-700 text-white">
+            <Download className="h-4 w-4" />
+            تصدير تقرير (Excel)
+          </Button>
         </div>
 
         {/* Stats Grid */}

@@ -3,6 +3,24 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Plus, CheckSquare, Clock, Users, ArrowUpRight } from "lucide-react"
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog"
+import { Label } from "@/components/ui/label"
+import { Input } from "@/components/ui/input"
+import { 
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select"
 
 export default function OfficeTasksPage() {
     return (
@@ -13,10 +31,48 @@ export default function OfficeTasksPage() {
                         <h1 className="text-3xl font-bold text-foreground">مهام المكتب</h1>
                         <p className="text-muted-foreground mt-1">إدارة وتوزيع المهام على فريق المحامين</p>
                     </div>
-                    <Button className="gap-2 bg-magenta hover:bg-magenta/90 text-white">
-                        <Plus className="h-4 w-4" />
-                        تعيين مهمة جديدة
-                    </Button>
+                    <Dialog>
+                        <DialogTrigger asChild>
+                            <Button className="gap-2 bg-magenta hover:bg-magenta/90 text-white">
+                                <Plus className="h-4 w-4" />
+                                تعيين مهمة جديدة
+                            </Button>
+                        </DialogTrigger>
+                        <DialogContent className="sm:max-w-[425px]">
+                            <DialogHeader>
+                                <DialogTitle>تعيين مهمة جديدة</DialogTitle>
+                                <DialogDescription>
+                                    قم بإنشاء مهمة جديدة وتعيينها لأحد أفراد فريقك.
+                                </DialogDescription>
+                            </DialogHeader>
+                            <div className="grid gap-4 py-4">
+                                <div className="space-y-2">
+                                    <Label htmlFor="task-title">عنوان المهمة</Label>
+                                    <Input id="task-title" placeholder="مثال: مراجعة المستندات" />
+                                </div>
+                                <div className="space-y-2">
+                                    <Label htmlFor="deadline">تاريخ الاستحقاق</Label>
+                                    <Input id="deadline" type="date" />
+                                </div>
+                                <div className="space-y-2">
+                                    <Label htmlFor="assignee">تعيين إلى</Label>
+                                    <Select>
+                                        <SelectTrigger className="w-full text-right" dir="rtl">
+                                            <SelectValue placeholder="اختر المحامي" />
+                                        </SelectTrigger>
+                                        <SelectContent dir="rtl">
+                                            <SelectItem value="ahmed">أحمد (متدرب)</SelectItem>
+                                            <SelectItem value="sarah">سارة جونسون</SelectItem>
+                                            <SelectItem value="michael">مايكل تشين</SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                </div>
+                            </div>
+                            <DialogFooter>
+                                <Button type="submit" className="w-full bg-magenta hover:bg-magenta/90 text-white">إضافة المهمة</Button>
+                            </DialogFooter>
+                        </DialogContent>
+                    </Dialog>
                 </div>
 
                 <div className="grid lg:grid-cols-3 gap-6">
@@ -45,13 +101,17 @@ export default function OfficeTasksPage() {
                                         <h4 className="font-semibold text-sm">{task.title}</h4>
                                         <p className="text-xs text-muted-foreground mt-1">{task.case}</p>
                                     </div>
-                                    <div className="flex items-center justify-between pt-2 border-t border-border">
+                                    <div className="flex items-center justify-between pt-2 border-t border-border mt-3">
                                         <span className="text-xs flex items-center gap-1 text-muted-foreground"><Clock className="h-3 w-3" /> اليوم</span>
                                         <Badge variant="outline" className="text-xs flex items-center gap-1 bg-secondary/30">
                                             <Users className="h-3 w-3 text-magenta" />
                                             {task.assignee}
                                         </Badge>
                                     </div>
+                                    <Button variant="outline" size="sm" className="w-full gap-2 mt-2 h-8 text-xs">
+                                        <CheckSquare className="h-3 w-3 text-accent" />
+                                        إكمال المهمة
+                                    </Button>
                                 </CardContent>
                             </Card>
                         ))}
@@ -81,13 +141,17 @@ export default function OfficeTasksPage() {
                                         <h4 className="font-semibold text-sm">{task.title}</h4>
                                         <p className="text-xs text-muted-foreground mt-1">{task.case}</p>
                                     </div>
-                                    <div className="flex items-center justify-between pt-2 border-t border-border">
+                                    <div className="flex items-center justify-between pt-2 border-t border-border mt-3">
                                         <span className="text-xs flex items-center gap-1 text-muted-foreground"><Clock className="h-3 w-3" /> غداً</span>
                                         <Badge variant="outline" className="text-xs flex items-center gap-1 bg-secondary/30">
                                             <Users className="h-3 w-3 text-magenta" />
                                             {task.assignee}
                                         </Badge>
                                     </div>
+                                    <Button variant="outline" size="sm" className="w-full gap-2 mt-2 h-8 text-xs">
+                                        <CheckSquare className="h-3 w-3 text-accent" />
+                                        إكمال المهمة
+                                    </Button>
                                 </CardContent>
                             </Card>
                         ))}

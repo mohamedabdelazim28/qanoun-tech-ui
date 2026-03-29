@@ -4,7 +4,18 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Search, Plus, FileText, Clock, Users, CheckCircle2 } from "lucide-react"
-
+import { Checkbox } from "@/components/ui/checkbox"
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog"
+import { Label } from "@/components/ui/label"
+import { Textarea } from "@/components/ui/textarea"
 export default function OfficeCasesPage() {
     return (
         <DashboardLayout role="office">
@@ -14,10 +25,51 @@ export default function OfficeCasesPage() {
                         <h1 className="text-3xl font-bold text-foreground">قضايا المكتب</h1>
                         <p className="text-muted-foreground mt-1">متابعة جميع القضايا وتوزيع المهام على فريق العمل</p>
                     </div>
-                    <Button className="gap-2 bg-magenta hover:bg-magenta/90 text-white">
-                        <Plus className="h-4 w-4" />
-                        إضافة قضية جديدة
-                    </Button>
+                    <Dialog>
+                        <DialogTrigger asChild>
+                            <Button className="gap-2 bg-magenta hover:bg-magenta/90 text-white">
+                                <Plus className="h-4 w-4" />
+                                إضافة قضية جديدة
+                            </Button>
+                        </DialogTrigger>
+                        <DialogContent className="sm:max-w-[425px]">
+                            <DialogHeader>
+                                <DialogTitle>إضافة قضية جديدة</DialogTitle>
+                                <DialogDescription>
+                                    أدخل تفاصيل القضية الجديدة للمكتب.
+                                </DialogDescription>
+                            </DialogHeader>
+                            <div className="grid gap-4 py-4">
+                                <div className="space-y-2">
+                                    <Label htmlFor="title">عنوان القضية</Label>
+                                    <Input id="title" placeholder="مثال: استحواذ شركة التقنية" />
+                                </div>
+                                <div className="space-y-2">
+                                    <Label htmlFor="client">اسم العميل</Label>
+                                    <Input id="client" placeholder="اسم العميل أو الشركة" />
+                                </div>
+                                <div className="space-y-2">
+                                    <Label htmlFor="type">نوع القضية</Label>
+                                    <Input id="type" placeholder="مثال: شركات، عقارات..." />
+                                </div>
+                                <div className="space-y-2">
+                                    <Label htmlFor="assignee">تعيين محامي</Label>
+                                    <Input id="assignee" placeholder="اسم المحامي المسؤول" />
+                                </div>
+                                <div className="space-y-2">
+                                    <Label htmlFor="description">وصف مختصر (خياري)</Label>
+                                    <Textarea id="description" placeholder="تفاصيل موجزة عن القضية" />
+                                </div>
+                                <div className="space-y-2">
+                                    <Label htmlFor="date">تاريخ الجلسة</Label>
+                                    <Input id="date" type="date" />
+                                </div>
+                            </div>
+                            <DialogFooter>
+                                <Button type="submit" className="w-full bg-magenta hover:bg-magenta/90 text-white">إضافة القضية</Button>
+                            </DialogFooter>
+                        </DialogContent>
+                    </Dialog>
                 </div>
 
                 <Card>
@@ -115,12 +167,10 @@ export default function OfficeCasesPage() {
                                         {caseItem.tasks.map((task, tIdx) => (
                                             <div key={tIdx} className="flex flex-col gap-2 bg-background p-3 rounded border border-border text-sm">
                                                 <div className="flex items-start gap-2">
-                                                    {task.completed ? (
-                                                        <CheckCircle2 className="h-4 w-4 text-accent shrink-0 mt-0.5" />
-                                                    ) : (
-                                                        <div className="h-4 w-4 rounded-full border border-muted-foreground shrink-0 mt-0.5" />
-                                                    )}
-                                                    <span className={task.completed ? "line-through text-muted-foreground" : "font-medium"}>{task.name}</span>
+                                                    <Checkbox id={`task-${idx}-${tIdx}`} defaultChecked={task.completed} className="mt-0.5 peer" />
+                                                    <label htmlFor={`task-${idx}-${tIdx}`} className="leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 font-medium cursor-pointer peer-data-[state=checked]:line-through peer-data-[state=checked]:text-muted-foreground">
+                                                        {task.name}
+                                                    </label>
                                                 </div>
                                                 <div className="flex justify-end mt-1">
                                                     <Badge variant="outline" className="text-xs bg-secondary text-secondary-foreground">{task.assignee}</Badge>

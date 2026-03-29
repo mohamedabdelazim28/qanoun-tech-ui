@@ -26,7 +26,7 @@ const MOCK_LAWYERS = [
     name: "د. سارة حسين",
     type: "lawyer",
     specialization: "قانون العمل والتأمينات",
-    city: "الرياض",
+    city: "القاهرة",
     rating: 4.9,
     reviewsCount: 189,
     experienceYears: 15,
@@ -40,9 +40,9 @@ const MOCK_LAWYERS = [
   {
     id: 2,
     name: "أ. محمد السيد",
-    type: "lawyer",
+    type: "lawyer" as const,
     specialization: "قانون الشركات والعقود التجارية",
-    city: "جدة",
+    city: "الجيزة",
     rating: 4.8,
     reviewsCount: 167,
     experienceYears: 12,
@@ -56,9 +56,9 @@ const MOCK_LAWYERS = [
   {
     id: 3,
     name: "أ. فاطمة أحمد",
-    type: "lawyer",
+    type: "lawyer" as const,
     specialization: "قانون الأحوال الشخصية",
-    city: "الدمام",
+    city: "الإسكندرية",
     rating: 4.7,
     reviewsCount: 134,
     experienceYears: 10,
@@ -75,9 +75,9 @@ const MOCK_OFFICES = [
   {
     id: 1,
     name: "مكتب النور للمحاماة والاستشارات القانونية",
-    type: "office",
+    type: "office" as const,
     specializations: ["قانون الشركات", "قانون العمل", "القانون التجاري"],
-    city: "الرياض",
+    city: "القاهرة",
     rating: 4.9,
     reviewsCount: 312,
     lawyersCount: 12,
@@ -90,9 +90,9 @@ const MOCK_OFFICES = [
   {
     id: 2,
     name: "مكتب الخليج القانوني",
-    type: "office",
+    type: "office" as const,
     specializations: ["قانون العقارات", "قانون البناء", "قانون الأراضي"],
-    city: "جدة",
+    city: "الجيزة",
     rating: 4.8,
     reviewsCount: 278,
     lawyersCount: 8,
@@ -105,9 +105,9 @@ const MOCK_OFFICES = [
   {
     id: 3,
     name: "مكتب العدالة للمحاماة",
-    type: "office",
+    type: "office" as const,
     specializations: ["قانون جنائي", "قانون مدني", "قضايا الأسرة"],
-    city: "الدمام",
+    city: "المنصورة",
     rating: 4.6,
     reviewsCount: 198,
     lawyersCount: 6,
@@ -130,7 +130,7 @@ const SPECIALIZATIONS = [
   "قانون جنائي",
 ]
 
-const CITIES = ["الكل", "الرياض", "جدة", "الدمام", "مكة المكرمة", "المدينة المنورة"]
+const CITIES = ["الكل", "القاهرة", "الجيزة", "الإسكندرية", "المنصورة", "طنطا", "سوهاج", "أسيوط"]
 
 export default function DiscoveryPage() {
   const [searchType, setSearchType] = useState<"lawyers" | "offices">("lawyers")
@@ -138,7 +138,18 @@ export default function DiscoveryPage() {
   const [selectedSpecialization, setSelectedSpecialization] = useState("الكل")
   const [selectedCity, setSelectedCity] = useState("الكل")
 
-  const displayData = searchType === "lawyers" ? MOCK_LAWYERS : MOCK_OFFICES
+  const baseData = searchType === "lawyers" ? MOCK_LAWYERS : MOCK_OFFICES
+  const displayData = baseData.filter((item: any) => {
+    const matchesSearch = item.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+      (item.type === "office" ? item.specializations.join(" ") : item.specialization).toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesCity = selectedCity === "الكل" || item.city === selectedCity;
+    const matchesSpec = selectedSpecialization === "الكل" || 
+      (item.type === "office" 
+        ? item.specializations.includes(selectedSpecialization) 
+        : item.specialization.includes(selectedSpecialization));
+    
+    return matchesSearch && matchesCity && matchesSpec;
+  })
 
   return (
     <ClientLayout>

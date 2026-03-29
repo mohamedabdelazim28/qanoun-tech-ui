@@ -61,7 +61,7 @@ export function DashboardLayout({ children, role }: DashboardLayoutProps) {
       case "lawyer":
         return [
           { icon: Home, label: "لوحة التحكم", href: "/dashboard/lawyer" },
-          { icon: HelpCircle, label: "الاستشارات القانونية", href: "/consultations" },
+          { icon: HelpCircle, label: "الاستشارات القانونية", href: "/dashboard/lawyer/consultations" },
           { icon: FileText, label: "القضايا", href: "/dashboard/lawyer/cases" },
           { icon: CheckSquare, label: "المهام", href: "/dashboard/lawyer/tasks" },
           { icon: UserCircle, label: "الملف الشخصي", href: "/dashboard/lawyer/profile" },
@@ -96,7 +96,7 @@ export function DashboardLayout({ children, role }: DashboardLayoutProps) {
   return (
     <div className="min-h-screen bg-background flex">
       {/* Sidebar - Desktop */}
-      <aside className="hidden md:flex md:flex-col md:w-64 bg-sidebar text-sidebar-foreground border-l border-sidebar-border">
+      <aside className="hidden md:flex md:flex-col md:w-64 bg-sidebar text-sidebar-foreground border-l border-sidebar-border sticky top-0 h-screen shrink-0">
         <div className="p-6 border-b border-sidebar-border">
           <Link href="/" className="flex items-center gap-3">
             <LogoIcon className="h-10 w-10" />
@@ -113,8 +113,8 @@ export function DashboardLayout({ children, role }: DashboardLayoutProps) {
                 <Button
                   variant="ghost"
                   className={`w-full justify-start gap-3 h-11 ${isActive
-                      ? "bg-sidebar-accent text-sidebar-accent-foreground"
-                      : "text-sidebar-foreground/80 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+                    ? "bg-sidebar-accent text-sidebar-accent-foreground"
+                    : "text-sidebar-foreground/80 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
                     }`}
                 >
                   <Icon className="h-5 w-5" />
@@ -126,15 +126,6 @@ export function DashboardLayout({ children, role }: DashboardLayoutProps) {
         </nav>
 
         <div className="p-4 border-t border-sidebar-border space-y-1">
-          <Link href={`/dashboard/${role}/settings`}>
-            <Button
-              variant="ghost"
-              className="w-full justify-start gap-3 h-11 text-sidebar-foreground/80 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
-            >
-              <Settings className="h-5 w-5" />
-              <span className="font-medium">الإعدادات</span>
-            </Button>
-          </Link>
           <Button
             variant="ghost"
             onClick={handleLogout}
@@ -184,8 +175,8 @@ export function DashboardLayout({ children, role }: DashboardLayoutProps) {
                     <Button
                       variant="ghost"
                       className={`w-full justify-start gap-3 h-11 ${isActive
-                          ? "bg-sidebar-accent text-sidebar-accent-foreground"
-                          : "text-sidebar-foreground/80 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+                        ? "bg-sidebar-accent text-sidebar-accent-foreground"
+                        : "text-sidebar-foreground/80 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
                         }`}
                     >
                       <Icon className="h-5 w-5" />
@@ -194,15 +185,17 @@ export function DashboardLayout({ children, role }: DashboardLayoutProps) {
                   </Link>
                 )
               })}
-              <Link href={`/dashboard/${role}/settings`} onClick={() => setIsMobileMenuOpen(false)}>
-                <Button
-                  variant="ghost"
-                  className="w-full justify-start gap-3 h-11 text-sidebar-foreground/80 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
-                >
-                  <Settings className="h-5 w-5" />
-                  <span className="font-medium">الإعدادات</span>
-                </Button>
-              </Link>
+              {role !== "lawyer" && (
+                <Link href={`/dashboard/${role}/settings`} onClick={() => setIsMobileMenuOpen(false)}>
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start gap-3 h-11 text-sidebar-foreground/80 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+                  >
+                    <Settings className="h-5 w-5" />
+                    <span className="font-medium">الإعدادات</span>
+                  </Button>
+                </Link>
+              )}
               <Button
                 variant="ghost"
                 onClick={handleLogout}

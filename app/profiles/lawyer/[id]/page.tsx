@@ -18,13 +18,14 @@ import {
 } from "lucide-react"
 import Link from "next/link"
 
-const MOCK_LAWYER_PROFILE = {
-  id: 1,
-  name: "د. سارة حسين",
-  title: "محامية متخصصة في قانون العمل والتأمينات الاجتماعية",
-  bio: "محامية معتمدة مع أكثر من 15 عاماً من الخبرة في مجال قانون العمل والتأمينات الاجتماعية. حاصلة على دكتوراه في القانون من جامعة الملك سعود. متخصصة في قضايا الفصل التعسفي، النزاعات العمالية، عقود العمل، والتأمينات الاجتماعية. عملت كمستشارة قانونية لعدة شركات كبرى وساعدت مئات العملاء في الحصول على حقوقهم القانونية.",
-  specializations: ["قانون العمل", "التأمينات الاجتماعية", "النزاعات العمالية", "عقود العمل"],
-  city: "الرياض",
+const MOCK_LAWYERS_DATA = [
+  {
+    id: 1,
+    name: "د. سارة حسين",
+    title: "محامية متخصصة في قانون العمل والتأمينات الاجتماعية",
+    bio: "محامية معتمدة مع أكثر من 15 عاماً من الخبرة في مجال قانون العمل والتأمينات الاجتماعية. حاصلة على دكتوراه في القانون من جامعة القاهرة. متخصصة في قضايا الفصل التعسفي، النزاعات العمالية، عقود العمل، والتأمينات الاجتماعية. عملت كمستشارة قانونية لعدة شركات كبرى وساعدت مئات العملاء في الحصول على حقوقهم القانونية.",
+    specializations: ["قانون العمل", "التأمينات الاجتماعية", "النزاعات العمالية", "عقود العمل"],
+    city: "القاهرة",
   rating: 4.9,
   reviewsCount: 189,
   experienceYears: 15,
@@ -35,26 +36,26 @@ const MOCK_LAWYER_PROFILE = {
   education: [
     {
       degree: "دكتوراه في القانون",
-      institution: "جامعة الملك سعود",
+      institution: "جامعة القاهرة",
       year: "2008",
     },
     {
       degree: "ماجستير في القانون المدني",
-      institution: "جامعة الملك عبدالعزيز",
+      institution: "جامعة عين شمس",
       year: "2005",
     },
     {
-      degree: "بكالوريوس في الشريعة والقانون",
-      institution: "جامعة الإمام محمد بن سعود",
+      degree: "بكالوريوس في الحقوق",
+      institution: "جامعة الإسكندرية",
       year: "2002",
     },
   ],
-  certifications: ["عضو الهيئة السعودية للمحامين", "محامية معتمدة من وزارة العدل", "شهادة في التحكيم التجاري الدولي"],
+  certifications: ["عضو نقابة المحامين المصريين", "محامية معتمدة من وزارة العدل", "شهادة في التحكيم التجاري الدولي"],
   achievements: [
     {
       title: "جائزة أفضل محامي في قانون العمل",
       year: "2023",
-      description: "جائزة من الهيئة السعودية للمحامين",
+      description: "جائزة من نقابة المحامين",
     },
     {
       title: "نسبة نجاح 95% في قضايا الفصل التعسفي",
@@ -107,9 +108,63 @@ const MOCK_LAWYER_PROFILE = {
       comment: "محامية متميزة ومتعاونة. استجابة سريعة ومتابعة دقيقة للقضية.",
     },
   ],
-}
+  },
+  {
+    id: 2,
+    name: "أ. محمد السيد",
+    title: "محامي متخصص في قانون الشركات والعقود التجارية",
+    bio: "خبير قانوني ذو باع طويل في تأسيس الشركات وصياغة العقود التجارية المعقدة.",
+    specializations: ["قانون الشركات", "الطرح العام", "الاندماج والاستحواذ", "التجارة الدولية"],
+    city: "الجيزة",
+    rating: 4.8,
+    reviewsCount: 167,
+    experienceYears: 12,
+    casesCompleted: 198,
+    answersCount: 125,
+    verified: true,
+    languages: ["العربية", "الإنجليزية", "الفرنسية"],
+    education: [
+      { degree: "ماجستير قانون الشركات", institution: "جامعة القاهرة", year: "2010" }
+    ],
+    certifications: ["محامي معتمد لدى محكمة النقض"],
+    achievements: [],
+    recentActivity: [],
+    reviews: []
+  },
+  {
+    id: 3,
+    name: "أ. فاطمة أحمد",
+    title: "محامية متخصصة في قانون الأحوال الشخصية",
+    bio: "محامية ذات خبرة كبيرة في حل النزاعات الأسرية وقضايا الأحوال الشخصية بمنتهى السرية والاحترافية.",
+    specializations: ["قانون الأحوال الشخصية", "قضايا أسرية", "حضانة", "ميراث"],
+    city: "الإسكندرية",
+    rating: 4.7,
+    reviewsCount: 134,
+    experienceYears: 10,
+    casesCompleted: 176,
+    answersCount: 95,
+    verified: true,
+    languages: ["العربية"],
+    education: [
+      { degree: "بكالوريوس حقوق", institution: "جامعة الإسكندرية", year: "2013" }
+    ],
+    certifications: ["عضو اتحاد المحامين العرب"],
+    achievements: [],
+    recentActivity: [],
+    reviews: []
+  }
+]
 
-export default function LawyerProfilePage() {
+export default async function LawyerProfilePage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const profileId = parseInt(id) || 1;
+  const MOCK_LAWYER_PROFILE = MOCK_LAWYERS_DATA.find((p) => p.id === profileId) || {
+    ...MOCK_LAWYERS_DATA[0],
+    id: profileId,
+    name: "محامي غير معروف",
+    city: "غير متاح"
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -362,7 +417,7 @@ export default function LawyerProfilePage() {
                 <CardContent className="space-y-3 text-sm">
                   <div className="flex items-center gap-2">
                     <MapPin className="h-4 w-4 text-muted-foreground" />
-                    <span>{MOCK_LAWYER_PROFILE.city}, المملكة العربية السعودية</span>
+                    <span>{MOCK_LAWYER_PROFILE.city}, جمهورية مصر العربية</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Clock className="h-4 w-4 text-muted-foreground" />

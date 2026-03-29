@@ -1,11 +1,66 @@
+"use client"
+
+import { useState } from "react"
 import { DashboardLayout } from "@/components/dashboard-layout"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
-import { Search, Plus, FileText, Clock, Users, CheckCircle2 } from "lucide-react"
+import { Checkbox } from "@/components/ui/checkbox"
+import { Search, Plus, FileText, Clock, Users } from "lucide-react"
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog"
+import { Label } from "@/components/ui/label"
+import { Textarea } from "@/components/ui/textarea"
 
 export default function LawyerCasesPage() {
+    const [cases, setCases] = useState([
+        {
+            title: "جونسون ضد شركة التقنية",
+            type: "قانون العمل",
+            status: "حرجة",
+            statusColor: "destructive",
+            id: "2024-01",
+            progress: 75,
+            tasks: [
+                { name: "تقديم طلب حكم عاجل", assignee: "سارة (محامي أول)", completed: true },
+                { name: "مراجعة الشهود", assignee: "أحمد (محامي متدرب)", completed: false },
+            ]
+        },
+        {
+            title: "نزاع ملكية مارتينيز",
+            type: "عقارات",
+            status: "نشطة",
+            statusColor: "accent",
+            id: "2024-03",
+            progress: 40,
+            tasks: [
+                { name: "جمع الوثائق", assignee: "منى (مساعد قانوني)", completed: true },
+                { name: "صياغة العقد", assignee: "أنت", completed: false },
+            ]
+        },
+    ]);
+
+    const toggleTask = (caseIdx: number, taskIdx: number) => {
+        setCases(prevCases => {
+            const newCases = [...prevCases];
+            newCases[caseIdx] = { ...newCases[caseIdx] };
+            newCases[caseIdx].tasks = [...newCases[caseIdx].tasks];
+            newCases[caseIdx].tasks[taskIdx] = {
+                ...newCases[caseIdx].tasks[taskIdx],
+                completed: !newCases[caseIdx].tasks[taskIdx].completed
+            };
+            return newCases;
+        });
+    };
+
     return (
         <DashboardLayout role="lawyer">
             <div className="p-6 space-y-6">
@@ -14,10 +69,47 @@ export default function LawyerCasesPage() {
                         <h1 className="text-3xl font-bold text-foreground">القضايا</h1>
                         <p className="text-muted-foreground mt-1">إدارة ومتابعة جميع القضايا الموكلة إليك</p>
                     </div>
-                    <Button className="gap-2">
-                        <Plus className="h-4 w-4" />
-                        إضافة قضية جديدة
-                    </Button>
+                    <Dialog>
+                        <DialogTrigger asChild>
+                            <Button className="gap-2">
+                                <Plus className="h-4 w-4" />
+                                إضافة قضية جديدة
+                            </Button>
+                        </DialogTrigger>
+                        <DialogContent className="sm:max-w-[425px]">
+                            <DialogHeader>
+                                <DialogTitle>إضافة قضية جديدة</DialogTitle>
+                                <DialogDescription>
+                                    أدخل تفاصيل القضية الجديدة وموكلها.
+                                </DialogDescription>
+                            </DialogHeader>
+                            <div className="grid gap-4 py-4">
+                                <div className="space-y-2">
+                                    <Label htmlFor="title">عنوان القضية</Label>
+                                    <Input id="title" placeholder="مثال: جونسون ضد شركة التقنية" />
+                                </div>
+                                <div className="space-y-2">
+                                    <Label htmlFor="client">اسم الموكل / العميل</Label>
+                                    <Input id="client" placeholder="اسم العميل أو الجهة الموكلة" />
+                                </div>
+                                <div className="space-y-2">
+                                    <Label htmlFor="type">نوع القضية</Label>
+                                    <Input id="type" placeholder="مثال: قانون العمل، عقارات، الخ..." />
+                                </div>
+                                <div className="space-y-2">
+                                    <Label htmlFor="description">وصف مختصر</Label>
+                                    <Textarea id="description" placeholder="تفاصيل موجزة عن القضية" />
+                                </div>
+                                <div className="space-y-2">
+                                    <Label htmlFor="date">تاريخ القضية / الجلسة</Label>
+                                    <Input id="date" type="date" />
+                                </div>
+                            </div>
+                            <DialogFooter>
+                                <Button type="submit" className="w-full">إضافة القضية</Button>
+                            </DialogFooter>
+                        </DialogContent>
+                    </Dialog>
                 </div>
 
                 <Card>
@@ -34,33 +126,8 @@ export default function LawyerCasesPage() {
                         </div>
                     </CardHeader>
                     <CardContent className="space-y-4">
-                        {[
-                            {
-                                title: "جونسون ضد شركة التقنية",
-                                type: "قانون العمل",
-                                status: "حرجة",
-                                statusColor: "destructive",
-                                id: "2024-01",
-                                progress: 75,
-                                tasks: [
-                                    { name: "تقديم طلب حكم عاجل", assignee: "سارة (محامي أول)", completed: true },
-                                    { name: "مراجعة الشهود", assignee: "أحمد (محامي متدرب)", completed: false },
-                                ]
-                            },
-                            {
-                                title: "نزاع ملكية مارتينيز",
-                                type: "عقارات",
-                                status: "نشطة",
-                                statusColor: "accent",
-                                id: "2024-03",
-                                progress: 40,
-                                tasks: [
-                                    { name: "جمع الوثائق", assignee: "منى (مساعد قانوني)", completed: true },
-                                    { name: "صياغة العقد", assignee: "أنت", completed: false },
-                                ]
-                            },
-                        ].map((caseItem, idx) => (
-                            <div key={idx} className="border border-border rounded-lg p-5 hover:border-purple/50 transition-colors">
+                        {cases.map((caseItem, caseIdx) => (
+                            <div key={caseIdx} className="border border-border rounded-lg p-5 hover:border-purple/50 transition-colors">
                                 <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-4">
                                     <div>
                                         <div className="flex items-center gap-3 mb-1">
@@ -93,14 +160,17 @@ export default function LawyerCasesPage() {
                                     </h5>
                                     <div className="grid sm:grid-cols-2 gap-3">
                                         {caseItem.tasks.map((task, tIdx) => (
-                                            <div key={tIdx} className="flex items-center justify-between bg-background p-2 rounded border border-border text-sm">
-                                                <div className="flex items-center gap-2">
-                                                    {task.completed ? (
-                                                        <CheckCircle2 className="h-4 w-4 text-accent" />
-                                                    ) : (
-                                                        <div className="h-4 w-4 rounded-full border border-muted-foreground" />
-                                                    )}
-                                                    <span className={task.completed ? "line-through text-muted-foreground" : ""}>{task.name}</span>
+                                            <div key={tIdx} className="flex items-center justify-between bg-background p-2 rounded border border-border text-sm hover:bg-muted/30 transition-colors">
+                                                <div 
+                                                    className="flex items-center gap-3 cursor-pointer w-full"
+                                                    onClick={() => toggleTask(caseIdx, tIdx)}
+                                                >
+                                                    <Checkbox 
+                                                        checked={task.completed} 
+                                                        onCheckedChange={() => toggleTask(caseIdx, tIdx)}
+                                                        className="pointer-events-none"
+                                                    />
+                                                    <span className={task.completed ? "line-through text-muted-foreground select-none" : "select-none"}>{task.name}</span>
                                                 </div>
                                                 <Badge variant="outline" className="text-xs bg-secondary text-secondary-foreground">{task.assignee}</Badge>
                                             </div>

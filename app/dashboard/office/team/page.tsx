@@ -3,6 +3,24 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Mail, Phone, TrendingUp, Briefcase, Award, Plus } from "lucide-react"
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog"
+import { Label } from "@/components/ui/label"
+import { Input } from "@/components/ui/input"
+import { 
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select"
 
 export default function OfficeTeamPage() {
     return (
@@ -13,10 +31,50 @@ export default function OfficeTeamPage() {
                         <h1 className="text-3xl font-bold text-foreground">فريق العمل</h1>
                         <p className="text-muted-foreground mt-1">إدارة المحامين وتقييم أدائهم</p>
                     </div>
-                    <Button className="gap-2 bg-magenta hover:bg-magenta/90 text-white">
-                        <Plus className="h-4 w-4" />
-                        إضافة عضو جديد
-                    </Button>
+                    <Dialog>
+                        <DialogTrigger asChild>
+                            <Button className="gap-2 bg-magenta hover:bg-magenta/90 text-white">
+                                <Plus className="h-4 w-4" />
+                                إضافة عضو جديد
+                            </Button>
+                        </DialogTrigger>
+                        <DialogContent className="sm:max-w-[425px]">
+                            <DialogHeader>
+                                <DialogTitle>إضافة عضو جديد</DialogTitle>
+                                <DialogDescription>
+                                    أدخل بيانات العضو الجديد لإضافته لفريقك.
+                                </DialogDescription>
+                            </DialogHeader>
+                            <div className="grid gap-4 py-4">
+                                <div className="space-y-2">
+                                    <Label htmlFor="memberName">الاسم الكامل</Label>
+                                    <Input id="memberName" placeholder="مثال: أحمد محمود" />
+                                </div>
+                                <div className="space-y-2">
+                                    <Label htmlFor="memberRole">الدور (المنصب)</Label>
+                                    <Select>
+                                        <SelectTrigger className="w-full text-right" dir="rtl">
+                                            <SelectValue placeholder="اختر المنصب" />
+                                        </SelectTrigger>
+                                        <SelectContent dir="rtl">
+                                            <SelectItem value="partner">شريك</SelectItem>
+                                            <SelectItem value="senior">محامي أول</SelectItem>
+                                            <SelectItem value="associate">محامي مساعد</SelectItem>
+                                            <SelectItem value="trainee">محامي متدرب</SelectItem>
+                                            <SelectItem value="paralegal">مساعد قانوني</SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                </div>
+                                <div className="space-y-2">
+                                    <Label htmlFor="memberEmail">البريد الإلكتروني</Label>
+                                    <Input id="memberEmail" type="email" placeholder="email@firm.com" dir="ltr" />
+                                </div>
+                            </div>
+                            <DialogFooter>
+                                <Button type="submit" className="w-full bg-magenta hover:bg-magenta/90 text-white">إضافة العضو</Button>
+                            </DialogFooter>
+                        </DialogContent>
+                    </Dialog>
                 </div>
 
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
